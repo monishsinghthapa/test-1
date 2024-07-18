@@ -1,0 +1,78 @@
+[
+    {
+        "prompt": "Show me examples of when we called out <select driver>",
+        "promptVar": "Show me examples of when we called out {{D}}",
+        "dropdown": [
+            {
+                "type": "drivers",
+                "option": [
+                    "McKesson Ventures",
+                    "discrete tax items",
+                    "GLP-1s",
+                    "interest income",
+                    "interest rates",
+                    "AI",
+                    "ClarusONE",
+                    "investments in technology",
+                    "sourcing benefits"
+                ]
+            }
+        ]
+    },
+    {
+        "prompt": "What drivers did we provide for the US Pharmaceutical outlook on our <select quarter> <select fiscal year> earnings call?",
+        "promptVar": "What drivers did we provide for the US Pharmaceutical outlook on our {{Q}} {{FY}} earnings call?",
+        "dropdown": [
+            {
+                "type": "quarters",
+                "option": [
+                    "Q1",
+                    "Q2",
+                    "Q3",
+                    "Q4"
+                ]
+            },
+            {
+                "type": "fy",
+                "option": [
+                    "FY24",
+                    "FY23",
+                    "FY22",
+                    "FY21",
+                    "FY20"
+                ]
+            }
+        ]
+    },
+    {
+        "prompt": "What were the topics discussed by the analysts during earning call of <select fiscal year> <select quarter> ?",
+        "promptVar": "What were the topics discussed by the analysts during earning call of {{Q}} {{FY}}?",
+        "dropdown": [
+            {
+                "type": "quarters",
+                "option": [
+                    "Q1",
+                    "Q2",
+                    "Q3",
+                    "Q4"
+                ]
+            },
+            {
+                "type": "fy",
+                "option": [
+                    "FY24",
+                    "FY23",
+                    "FY22",
+                    "FY21",
+                    "FY20"
+                ]
+            }
+        ]
+    },
+    {
+        "prompt": "Find examples where we mentioned contract renewals."
+    },
+    {
+        "prompt": "What was the guidance provided on EPS on quarterly basis?"
+    }
+]

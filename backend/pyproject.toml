@@ -1,0 +1,36 @@
+[tool]
+[tool.poetry]
+name = "Fiscal Navigator"
+version = "0.1.0"
+description = ""
+authors = [ "Prashant Renu <prashant.renu@exlservice.com>" ]
+readme = "README.md"
+
+[tool.poetry.scripts]
+generate = "app.engine.generate:generate_datasource"
+
+[tool.poetry.dependencies]
+python = "^3.11,<3.12"
+fastapi = "^0.109.1"
+python-dotenv = "^1.0.0"
+aiostream = "^0.5.2"
+llama-index = "0.10.28"
+llama-index-core = "0.10.28"
+llama-index-llms-azure-openai = "^0.1.8"
+llama-index-vector-stores-faiss = "^0.1.2"
+llama-index-embeddings-huggingface = "^0.2.0"
+faiss-cpu = "^1.8.0"
+
+[tool.poetry.dependencies.uvicorn]
+extras = [ "standard" ]
+version = "^0.23.2"
+
+[tool.poetry.dependencies.docx2txt]
+version = "^0.8"
+
+
+
+
+[build-system]
+requires = [ "poetry-core" ]
+build-backend = "poetry.core.masonry.api"

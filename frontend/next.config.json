@@ -1,0 +1,13 @@
+{
+  "experimental": {
+    
+    "serverComponentsExternalPackages": [
+      "sharp",
+      "onnxruntime-node"
+    ]
+  },
+  "output": "export",
+  "images": {
+    "unoptimized": true
+  }
+}
