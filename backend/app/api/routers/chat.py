@@ -89,7 +89,13 @@ async def parse_chat_data(data: _ChatData) -> Tuple[str, List[ChatMessage]]:
      wholly-owned legal entities that were
     based in different tax jurisdictions. (Source: MCK-Q1-FY24-ECT.pdf, Page Number: 10)
     '''
-    prompt=last_message.content + ". You must return the name of the Source file and the page number for each information in the response. This information must be presented elegantly in the markdown format.\n" + prompt_example
+    # prompt = last_message.content+" Answer as briefly and as concisely as possible"
+    # prompt = prompt + ". You must return the name of the Source file and the page number for each information in the response. This information must be presented elegantly in the markdown format.\n" + prompt_example
+    # print(prompt)
+    # prompt=last_message.content + ". You must return the name of the Source file and the page number for each information in the response. This information must be presented elegantly in the markdown format.\n" + prompt_example
+
+    prompt = last_message.content+"Provide details for each company seperately in points. \n"
+    prompt = prompt + ". You must return the name of the Source file and the page number for each information in the response. This information must be presented elegantly in the markdown format.\n" + prompt_example
     return prompt, messages
 
 
@@ -103,17 +109,22 @@ async def chat(
     last_message_content, messages = await parse_chat_data(data)
 
     event_handler = EventCallbackHandler()
+    chat_engine = get_chat_engine(last_message_content)
+
     chat_engine.callback_manager.handlers.append(event_handler)  # type: ignore
     response = await chat_engine.astream_chat(last_message_content, messages)
-
+    print(response)
+    
     async def content_generator():
         # Yield the text response
         async def _text_generator():
+            responseStr = ""
             async for token in response.async_response_gen():
+                responseStr += token
                 yield VercelStreamResponse.convert_text(token)
             # the text_generator is the leading stream, once it's finished, also finish the event stream
             event_handler.is_done = True
-
+            print(responseStr)
         # Yield the events from the event handler
         async def _event_generator():
             async for event in event_handler.async_event_gen():
@@ -153,6 +164,7 @@ async def chat_request(
     last_message_content, messages = await parse_chat_data(data)
 
     response = await chat_engine.achat(last_message_content, messages)
+    print(response)
     return _Result(
         result=_Message(role=MessageRole.ASSISTANT, content=response.response),
         nodes=_SourceNodes.from_source_nodes(response.source_nodes),

@@ -7,11 +7,13 @@ from app.engine.custom.my_retreiver import CustomRetrieverAndReranker
 from llama_index.core.chat_engine import CondensePlusContextChatEngine
 from llama_index.core.memory import ChatMemoryBuffer
 from llama_index.core.settings import Settings
-def get_chat_engine():
+from app.engine.FilterFileList import filterFileList
+
+def get_chat_engine(query="initial Query"):
     system_prompt = os.getenv("SYSTEM_PROMPT")
     # top_k = os.getenv("TOP_K", "3")
     # tools = []
-
+    print(query)
     # # Add query tool if index exists
     # index = get_index()
     # if index is not None:
@@ -29,10 +31,25 @@ def get_chat_engine():
     #     verbose=True,
     # )
     retreiver_ls = []
-    for file in URL_DICT.keys():        
-        index = get_index(file)
-        retriever = index.as_retriever(similarity_top_k=5)
-        retreiver_ls.append(retriever)
+    if(query=="initial Query"):
+        company_name = ["MCK"]
+        year = ["FY23"]
+        quarter = ["Q1"]
+    else:
+        quarter,year,company_name = filterFileList(query)
+
+    allfileList = URL_DICT.keys()
+    filteredFileList = []
+    for file in allfileList:
+        if (file[0:3] in company_name and file[4:6] in quarter and file[7:11] in year):
+            print(file)
+            filteredFileList.append(file)
+
+    for file in filteredFileList:    
+        # if (file.startswith(company_name) and file[4:6] in quarter and file[7:11] == year):
+            index = get_index(file)
+            retriever = index.as_retriever(similarity_top_k=5)
+            retreiver_ls.append(retriever)
     # synthesizer = get_response_synthesizer(response_mode="compact")
     top_k = os.getenv("TOP_K", "10")
     retreiver = CustomRetrieverAndReranker(retreiver_ls,rerank_top_k=top_k)
