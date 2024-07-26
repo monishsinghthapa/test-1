@@ -51,4 +51,5 @@ export type AnnotationData = ImageData | SourceData | EventData | ToolData;
 export type MessageAnnotation = {
   type: MessageAnnotationType;
   data: AnnotationData;
+ multiple_companies:boolean
 };

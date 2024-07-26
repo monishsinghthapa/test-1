@@ -55,7 +55,7 @@ class CustomRetrieverAndReranker(BaseRetriever):
 
         start_time = time.perf_counter()
         reranked_nodes = self._rerank.postprocess_nodes(nodes=filtered_nodes,query_bundle=query_bundle)
-        reranked_nodes = reranked_nodes[:5]
+        reranked_nodes = reranked_nodes[:8]
         processed_nodes = MetadataReplacementPostProcessor(target_metadata_key="window").postprocess_nodes(nodes=reranked_nodes)
         end_time = time.perf_counter()
         time_taken = end_time-start_time

@@ -33,6 +33,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, menuItemData }) => {
                 return 'Select Quarter'
             case 'fy':
                 return 'Select Fiscal Year'
+            case 'company':
+                    return 'Select Company'
 
             default:
                 break;
@@ -61,6 +63,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, menuItemData }) => {
                 updatedQue = updatedQue.replace('{{Q}}', selectedDriver.quarters);
             if (selectedDriver.fy)
                 updatedQue = updatedQue.replace('{{FY}}', selectedDriver.fy);
+            if(selectedDriver.company)
+                updatedQue = updatedQue.replace('{{COMP}}',selectedDriver.company)
         }
 
         return updatedQue;

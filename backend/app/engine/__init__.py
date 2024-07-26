@@ -64,7 +64,7 @@ def get_chat_engine(query="initial Query"):
         "\n\t2. Generate the answer in Markdown format only."
         "\n\t3. An example of the answer is given below:"
         "\n\t\t  ###Answer Summary:\\\n"
-        "\n\t\t  <p>The drivers provided for the US Pharmaceutical outlook on the Q4 FY22 earnings call included the efficiency and durability of the core distribution platform, the continued expansion of the oncology ecosystem, anticipated revenue increases, and a range of operating profit outcomes. These were influenced by factors such as COVID-19 vaccine distribution for the US government.<\p>.\\\n"
+        "\n\t\t  <p>The drivers provided for the US Pharmaceutical outlook on the Q4 FY22 earnings call included the efficiency and durability of the core distribution platform, the continued expansion of the oncology ecosystem, anticipated revenue increases, and a range of operating profit outcomes. These were influenced by factors such as COVID-19 vaccine distribution for the US government.(Source: MCK-Q1-FY21-ECT.pdf, Page Number: 10)<\p>.\\\n"
         "\n\t\t  ####Facts supporting the answer:\\\n"
         "\n\t\t  - **Q1 of FY21**: Anticipated discrete tax items expected to be realized during the year, with a specific mention of a favorable tax discrete item anticipated to be recorded in the fiscal second quarter.\\\n"
         "\n\t\t  - **Q1 of FY23**: A tax receivable gain related to McKesson's previous change healthcare investment.\\\n")

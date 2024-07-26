@@ -1,7 +1,7 @@
 [
     {
-        "prompt": "Show me examples of when we called out <select driver>",
-        "promptVar": "Show me examples of when we called out {{D}}",
+        "prompt": "For <select company>, Show me examples of when we called out <select driver>",
+        "promptVar": "For {{COMP}}, Show me examples of when we called out {{D}}",
         "dropdown": [
             {
                 "type": "drivers",
@@ -16,12 +16,20 @@
                     "investments in technology",
                     "sourcing benefits"
                 ]
+            },
+            {
+                "type":"company",
+                "option":[
+                    "Mckesson",
+                    "Cardinal Health",
+                    "Cencora"
+                ]
             }
         ]
     },
     {
-        "prompt": "What drivers did we provide for the US Pharmaceutical outlook on our <select quarter> <select fiscal year> earnings call?",
-        "promptVar": "What drivers did we provide for the US Pharmaceutical outlook on our {{Q}} {{FY}} earnings call?",
+        "prompt": "What drivers did we provide for the US Pharmaceutical outlook on our <select quarter> <select fiscal year> earnings call, for <select company>?",
+        "promptVar": "What drivers did we provide for the US Pharmaceutical outlook on our {{Q}} {{FY}} earnings call, for {{COMP}}?",
         "dropdown": [
             {
                 "type": "quarters",
@@ -41,12 +49,20 @@
                     "FY21",
                     "FY20"
                 ]
+            },
+            {
+                "type":"company",
+                "option":[
+                    "Mckesson",
+                    "Cardinal Health",
+                    "Cencora"
+                ]
             }
         ]
     },
     {
-        "prompt": "What were the topics discussed by the analysts during earning call of <select fiscal year> <select quarter> ?",
-        "promptVar": "What were the topics discussed by the analysts during earning call of {{Q}} {{FY}}?",
+        "prompt": "What were the topics discussed by the analysts during earning call of <select fiscal year> <select quarter>, for <select company> ?",
+        "promptVar": "What were the topics discussed by the analysts during earning call of {{Q}} {{FY}}, for {{COMP}}?",
         "dropdown": [
             {
                 "type": "quarters",
@@ -66,13 +82,43 @@
                     "FY21",
                     "FY20"
                 ]
+            },
+            {
+                "type":"company",
+                "option":[
+                    "Mckesson",
+                    "Cardinal Health",
+                    "Cencora"
+                ]
             }
         ]
     },
     {
-        "prompt": "Find examples where we mentioned contract renewals."
+        "prompt": "For <select company>, find examples where we mentioned contract renewals.",
+        "promptVar": "For {{COMP}}, find examples where we mentioned contract renewals.",
+        "dropdown": [
+            {
+                "type":"company",
+                "option":[
+                    "Mckesson",
+                    "Cardinal Health",
+                    "Cencora"
+                ]
+            }
+        ]
     },
     {
-        "prompt": "What was the guidance provided on EPS on quarterly basis?"
+        "prompt": "For <select company>, What was the guidance provided on EPS on quarterly basis?",
+        "promptVar": "For {{COMP}}, What was the guidance provided on EPS on quarterly basis?",
+        "dropdown": [
+            {
+                "type":"company",
+                "option":[
+                    "Mckesson",
+                    "Cardinal Health",
+                    "Cencora"
+                ]
+            }
+        ]
     }
 ]

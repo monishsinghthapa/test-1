@@ -45,7 +45,7 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ isOpen, onClose, ha
     return (
         <div className={`fixed inset-y-0 left-0 bg-white flex flex-col justify-between items-en z-50 w-96  py-6 transform transition-transform ease-in-out duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
 
-            <div>
+            <div style={{overflowY: "auto"}} >
                 <div className='px-4 flex items-center'>
                     <img src="/library.png" style={{ height: '25px' }} />
                     <span className='font-semibold text-xl ml-2'>Prompt Library</span>

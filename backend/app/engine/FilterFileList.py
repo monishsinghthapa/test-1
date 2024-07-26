@@ -8,14 +8,15 @@ def filterFileList(query):
     promptNumber = query.find("You must return the name of the Source file and the page number for each information in the response. This information must be presented elegantly in the markdown format.")
     query = query[:promptNumber]
      
-    MckessonNames = ["mckesson"," mck"]
-    CardinalNames = ["cardinal"," cah"]
-    CencoraNames = ["cencora"," cen"]
+    MckessonNames = ["mckesson","mck ","mck-","mck,","mck?","mck."]
+    CardinalNames = ["cardinal","cah ","cah-","cah,","cah?","cah."]
+    CencoraNames = ["cencora","cor ","cor-","cor,","cor?","cor."]
 
     quarter_pattern = r"(?i)Q\s?[1-4]|Quarter\s?[1-4]"
 
     year_pattern = r"(?i)FY\s?\d{2}|Year\s?\d{2}"
-
+    year_4_pattern = r"\b(1[0-9]{3}|2[0-9]{3})\b"
+    year_4_match = re.findall(year_4_pattern,query)
     # query = "What is the revenue of Mckesson and Cardinal in Quarter 2 FY 20 and Q1 of year 21"
 
     # quarter = re.findall(quarter_pattern,query)
@@ -32,7 +33,7 @@ def filterFileList(query):
             quarter.append(item2)
     else:
         quarter = ["Q1","Q2","Q3","Q4"]
-
+    print("year:",year_4_match)
     # Extract year
     year = []
     year_match = re.findall(year_pattern, query)
@@ -45,6 +46,11 @@ def filterFileList(query):
             # print(item2)
             year.append(item2)
         # year = year_match
+    elif year_4_match:
+        for item in year_4_match:
+            item2 = item[-2:]
+            item2 = "FY" + str(item2)
+            year.append(item2)
     else:
         year = ["FY24","FY23","FY22","FY21","FY20"]
 
@@ -76,3 +82,21 @@ def filterFileList(query):
     #     year = ["FY24"]
     #     company_name = ["Mckesson"]
     return quarter,year,company_name
+
+def getSourceDict(text):
+    pattern = r'\(Source:\s([^\)]+),\sPage\sNumber:\s([\d, ]+)\)'
+    matches = re.findall(pattern, text)
+
+    source_dict = {}
+    for match in matches:
+        source, pages = match
+        page_list = [int(page.strip()) for page in pages.split(',')]
+        if source in source_dict:
+            source_dict[source].extend(page_list)
+        else:
+            source_dict[source] = page_list
+
+    for file in source_dict:
+        pagenumberList = list(set(source_dict[file]))
+        source_dict[file] = pagenumberList
+    return source_dict

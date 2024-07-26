@@ -1,13 +1,15 @@
 "use client";
 
 import { CreateMessage, useChat } from "ai/react";
-import { ChatInput, ChatMessages } from "./ui/chat";
+import { AnnotationData, ChatInput, ChatMessages, MessageAnnotation } from "./ui/chat";
 import PdfViewer from "./ui/pdf";
-import { signal } from "@preact/signals-react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { URL_DICT } from '../components/ui/pdf/pdfmapping';
 import React, { useEffect, useState } from "react";
 
 import { AppContext } from "../Appcontext/AppContext";
+import { JSONValue } from "ai";
 
 
 
@@ -33,6 +35,7 @@ export default function ChatSection() {
     },
   });
   const [closeModal, setCloseModal] = useState<boolean>(false);
+  
 
   function test(q: string) {
     const userPrompt: CreateMessage = { role: 'user', content: q };
@@ -40,7 +43,7 @@ export default function ChatSection() {
   }
 
 
-  
+
   const { state } = React.useContext(AppContext)
   useEffect(() => {
     if (state.question && state.question !== '') {
@@ -57,10 +60,23 @@ export default function ChatSection() {
       return URL_DICT[name]
     }
   }
-const onPDFClose = ()=>{
-  setCloseModal(!closeModal)
-}
+
+  useEffect(()=>{
+     const annotations = messages[messages.length -1]?.annotations;
+
+    if(annotations !== undefined){
+      const value = (annotations[0] as MessageAnnotation).multiple_companies;
+      
+      if(value){
+        toast("Warning: Multi company search may not give good response.")
+      }
+    } 
   
+  },[isLoading])
+  const onPDFClose = () => {
+    setCloseModal(!closeModal)
+  }
+
   return (
     <div className="flex justify-between grow ml-4 mb-2 ">
       <div className="space-y-4 max-w-[98vw] w-full flex-col ">
@@ -92,6 +108,7 @@ const onPDFClose = ()=>{
 
         />
       </div>}
+      <ToastContainer theme="dark" position="bottom-left" />
     </div>
   );
 }

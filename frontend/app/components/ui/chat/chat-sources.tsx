@@ -17,7 +17,7 @@ export function ChatSources({ data }: { data: SourceData }) {
     return (
       data.nodes
         ?.filter((node) => Object.keys(node.metadata).length > 0)
-        ?.filter((node) => (node.score ?? 1) > SCORE_THRESHOLD)
+       // ?.filter((node) => (node.score ?? 1) > SCORE_THRESHOLD)
         .sort((a, b) => (b.score ?? 1) - (a.score ?? 1)) || []
     );
   }, [data.nodes]);
